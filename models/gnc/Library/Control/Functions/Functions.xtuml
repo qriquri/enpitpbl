@@ -56,9 +56,10 @@ INSERT INTO S_SYNC
 	"00000000-0000-0000-0000-000000000000",
 	'hault',
 	'',
-	'',
+	'select any ctrl from instances of Controller;
+generate Controller4:''hault'' to ctrl;',
 	"ba5eda7a-def5-0000-0000-000000000000",
-	3,
+	1,
 	'',
 	0);
 INSERT INTO PE_PE
