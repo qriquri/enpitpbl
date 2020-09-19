@@ -54,6 +54,15 @@ ros::ServiceClient land_client;
 ros::ServiceClient set_mode_client;
 ros::ServiceClient takeoff_client;
 ros::Subscriber command_sub;
+
+//MY_CODE-BEGIN
+struct MY_POSITION{
+	float x;
+	float y;
+	float z;
+};
+MY_POSITION My_position;
+//MYCODE-END
 /**
 \ingroup control_functions
 This structure is a convenient way to format waypoints
@@ -170,12 +179,19 @@ void gnc_set_destination(float x, float y, float z)
 	z = Zlocal + correction_vector_g.position.z + local_offset_pose_g.z;
 	ROS_INFO("Destination set to x: %f y: %f z: %f origin frame", x, y, z);
 
-	waypoint_g.pose.position.x = x;
-	waypoint_g.pose.position.y = y;
-	waypoint_g.pose.position.z = z;
+//	waypoint_g.pose.position.x = x;
+//	waypoint_g.pose.position.y = y;
+//	waypoint_g.pose.position.z = z;
+	//MYCODE-BEGIN
+	waypoint_g.pose.position.x = x + My_position.x;
+	waypoint_g.pose.position.y = y + My_position.y;
+	waypoint_g.pose.position.z = z + My_position.z;
+    My_position.x = waypoint_g.pose.position.x;
+    My_position.y = waypoint_g.pose.position.y;
+    My_position.z = waypoint_g.pose.position.z;
+    //MYCODE-END
 
-	is_waypoint_set = true;
-
+    is_waypoint_set = true;
 	local_pos_pub.publish(waypoint_g);
 }
 /**
@@ -305,6 +321,7 @@ The takeoff function will arm the drone and put the drone in a hover above the i
 */
 int gnc_takeoff(float takeoff_alt)
 {
+
 	//intitialize first waypoint of mission
 	gnc_set_destination(0,0,takeoff_alt);
 	for(int i=0; i<100; i++)

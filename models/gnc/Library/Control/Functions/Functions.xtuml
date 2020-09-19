@@ -38,8 +38,8 @@ INSERT INTO S_SYNC
 	"00000000-0000-0000-0000-000000000000",
 	'setup',
 	'',
-	'create object instance ctrl of Controller;
-generate Controller1:''start'' to ctrl;
+	'create object instance ctrl of Controller;//create instance 
+generate Controller1:''start'' to ctrl;//send start event
 ',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
@@ -56,8 +56,8 @@ INSERT INTO S_SYNC
 	"00000000-0000-0000-0000-000000000000",
 	'hault',
 	'',
-	'select any ctrl from instances of Controller;
-generate Controller4:''hault'' to ctrl;',
+	'select any ctrl from instances of Controller;//serch instance
+generate Controller4:''hault'' to ctrl;//send hault event',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
 	'',
