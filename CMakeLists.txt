@@ -210,3 +210,5 @@ target_link_libraries(ctrl ${catkin_LIBRARIES})
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+add_executable(control_sample src/control_sample.cpp)
+target_link_libraries(control_sample ${catkin_LIBRARIES})

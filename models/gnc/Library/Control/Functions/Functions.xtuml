@@ -38,8 +38,8 @@ INSERT INTO S_SYNC
 	"00000000-0000-0000-0000-000000000000",
 	'setup',
 	'',
-	'create object instance ctrl of Controller;
-generate Controller1:''start'' to ctrl;
+	'create object instance ctrl of Controller;//create instance 
+generate Controller1:''start'' to ctrl;//send start event
 ',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
@@ -56,14 +56,133 @@ INSERT INTO S_SYNC
 	"00000000-0000-0000-0000-000000000000",
 	'hault',
 	'',
-	'select any ctrl from instances of Controller;
-generate Controller4:''hault'' to ctrl;',
+	'select any ctrl from instances of Controller;//serch instance
+generate Controller4:''hault'' to ctrl;//send hault event',
 	"ba5eda7a-def5-0000-0000-000000000000",
 	1,
 	'',
 	0);
 INSERT INTO PE_PE
 	VALUES ("26cba2ed-335f-44c5-8a66-977beb3af2c4",
+	1,
+	"c266a8d5-aa61-43f4-9d01-7e2baedb603e",
+	"00000000-0000-0000-0000-000000000000",
+	1);
+INSERT INTO S_SYNC
+	VALUES ("5ecfb79f-4774-4477-bfea-dd41b2be49f2",
+	"00000000-0000-0000-0000-000000000000",
+	'up',
+	'',
+	'select any ctrl from instances of Controller;//serch instance
+generate Controller5:''up'' to ctrl;//send  event',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'',
+	0);
+INSERT INTO PE_PE
+	VALUES ("5ecfb79f-4774-4477-bfea-dd41b2be49f2",
+	1,
+	"c266a8d5-aa61-43f4-9d01-7e2baedb603e",
+	"00000000-0000-0000-0000-000000000000",
+	1);
+INSERT INTO S_SYNC
+	VALUES ("08261568-cccb-4005-8dc9-f1a3fd439ef0",
+	"00000000-0000-0000-0000-000000000000",
+	'down',
+	'',
+	'select any ctrl from instances of Controller;//serch instance
+generate Controller6:''down'' to ctrl;//send  event',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'',
+	0);
+INSERT INTO PE_PE
+	VALUES ("08261568-cccb-4005-8dc9-f1a3fd439ef0",
+	1,
+	"c266a8d5-aa61-43f4-9d01-7e2baedb603e",
+	"00000000-0000-0000-0000-000000000000",
+	1);
+INSERT INTO S_SYNC
+	VALUES ("fe37b0b8-3b94-46da-b936-31b3c3b1413f",
+	"00000000-0000-0000-0000-000000000000",
+	'front',
+	'',
+	'select any ctrl from instances of Controller;//serch instance
+generate Controller7:''front'' to ctrl;//send  event',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'',
+	0);
+INSERT INTO PE_PE
+	VALUES ("fe37b0b8-3b94-46da-b936-31b3c3b1413f",
+	1,
+	"c266a8d5-aa61-43f4-9d01-7e2baedb603e",
+	"00000000-0000-0000-0000-000000000000",
+	1);
+INSERT INTO S_SYNC
+	VALUES ("c6b3cef1-a17d-491d-a21b-2bab2dadc96b",
+	"00000000-0000-0000-0000-000000000000",
+	'back',
+	'',
+	'select any ctrl from instances of Controller;//serch instance
+generate Controller8:''back'' to ctrl;//send  event',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'',
+	0);
+INSERT INTO PE_PE
+	VALUES ("c6b3cef1-a17d-491d-a21b-2bab2dadc96b",
+	1,
+	"c266a8d5-aa61-43f4-9d01-7e2baedb603e",
+	"00000000-0000-0000-0000-000000000000",
+	1);
+INSERT INTO S_SYNC
+	VALUES ("73adf053-e665-4ade-8134-9c5599b26c8c",
+	"00000000-0000-0000-0000-000000000000",
+	'left',
+	'',
+	'select any ctrl from instances of Controller;//serch instance
+generate Controller9: ''left'' to ctrl;//send  event',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'',
+	0);
+INSERT INTO PE_PE
+	VALUES ("73adf053-e665-4ade-8134-9c5599b26c8c",
+	1,
+	"c266a8d5-aa61-43f4-9d01-7e2baedb603e",
+	"00000000-0000-0000-0000-000000000000",
+	1);
+INSERT INTO S_SYNC
+	VALUES ("c983acc7-4d8c-4d3e-81fd-b942b383763c",
+	"00000000-0000-0000-0000-000000000000",
+	'right',
+	'',
+	'select any ctrl from instances of Controller;//serch instance
+generate Controller10:''right'' to ctrl;//send  event',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'',
+	0);
+INSERT INTO PE_PE
+	VALUES ("c983acc7-4d8c-4d3e-81fd-b942b383763c",
+	1,
+	"c266a8d5-aa61-43f4-9d01-7e2baedb603e",
+	"00000000-0000-0000-0000-000000000000",
+	1);
+INSERT INTO S_SYNC
+	VALUES ("afce9e93-e69f-41ee-8422-f3c98f6aa598",
+	"00000000-0000-0000-0000-000000000000",
+	'stop',
+	'',
+	'select any ctrl from instances of Controller;//serch instance
+generate Controller11:''stop'' to ctrl;//send  event',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'',
+	0);
+INSERT INTO PE_PE
+	VALUES ("afce9e93-e69f-41ee-8422-f3c98f6aa598",
 	1,
 	"c266a8d5-aa61-43f4-9d01-7e2baedb603e",
 	"00000000-0000-0000-0000-000000000000",
