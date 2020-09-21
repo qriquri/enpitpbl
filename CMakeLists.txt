@@ -11,6 +11,8 @@ find_package(catkin REQUIRED)
 find_package(catkin REQUIRED COMPONENTS
   mavros
   std_msgs
+  
+  #message_generation
 )
 
 ## System dependencies are found with CMake's conventions
@@ -47,11 +49,13 @@ find_package(catkin REQUIRED COMPONENTS
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-# add_message_files(
-#   FILES
+add_message_files(
+   FILES
+   command.msg
+   GoalPos.msg
 #   Message1.msg
 #   Message2.msg
-# )
+ )
 
 ## Generate services in the 'srv' folder
 # add_service_files(
@@ -68,10 +72,10 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   std_msgs  # Or other packages containing msgs
-# )
+generate_messages(
+   DEPENDENCIES
+   std_msgs  # Or other packages containing msgs
+)
 
 
 ################################################
@@ -108,6 +112,7 @@ catkin_package(
 #  LIBRARIES gnc
 #  CATKIN_DEPENDS other_catkin_pkg
 #  DEPENDS system_lib
+   CATKIN_DEPENDS std_msgs message_runtime
 )
 
 ###########
@@ -211,4 +216,6 @@ target_link_libraries(ctrl ${catkin_LIBRARIES})
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 add_executable(control_sample src/control_sample.cpp)
+add_dependencies(control_sample ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+
 target_link_libraries(control_sample ${catkin_LIBRARIES})

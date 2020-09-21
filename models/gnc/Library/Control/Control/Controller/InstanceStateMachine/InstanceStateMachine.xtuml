@@ -1997,7 +1997,7 @@ INSERT INTO SM_ACT
 	VALUES ("338ba753-ccee-46df-be33-cb20e26ee4a7",
 	"c0c74364-95af-42df-a665-9e2fd1a7f507",
 	1,
-	'Port1::takeoff( alt:1 );
+	'Port1::takeoff( alt:4 );
 Port1::set_heading(heading:0);',
 	'',
 	0);
@@ -2041,7 +2041,7 @@ INSERT INTO SM_ACT
 	VALUES ("0d408f26-9057-493f-b6b5-02145fc3a425",
 	"c0c74364-95af-42df-a665-9e2fd1a7f507",
 	1,
-	'Port1::set_destination( x:0, y:1, z:0 );
+	'Port1::set_destination( x:0, y:3, z:0 );
 Port1::set_heading( heading:0 );',
 	'',
 	0);
@@ -2056,7 +2056,7 @@ INSERT INTO SM_ACT
 	VALUES ("bcc23068-414a-4fa6-ae0d-794dd0beba4b",
 	"c0c74364-95af-42df-a665-9e2fd1a7f507",
 	1,
-	'Port1::set_destination( x:0, y:1, z:0 );
+	'Port1::set_destination( x:0, y:3, z:0 );
 Port1::set_heading( heading:0 );',
 	'',
 	0);
@@ -2142,7 +2142,7 @@ INSERT INTO SM_ACT
 	VALUES ("6f3a9bf2-0194-4e35-921b-bc2c758d51e0",
 	"c0c74364-95af-42df-a665-9e2fd1a7f507",
 	1,
-	'Port1::set_destination( x:0, y:-1, z:0 );
+	'Port1::set_destination( x:0, y:-3, z:0 );
 Port1::set_heading( heading:0 );',
 	'',
 	0);
@@ -2157,7 +2157,7 @@ INSERT INTO SM_ACT
 	VALUES ("31d9746e-12e2-404a-9564-852aa6cfbacf",
 	"c0c74364-95af-42df-a665-9e2fd1a7f507",
 	1,
-	'Port1::set_destination( x:0, y:-1, z:0 );
+	'Port1::set_destination( x:0, y:-3, z:0 );
 Port1::set_heading( heading:0 );',
 	'',
 	0);
@@ -2214,7 +2214,7 @@ INSERT INTO SM_ACT
 	VALUES ("ac1ea760-e80b-4c12-af77-f43983d1b11e",
 	"c0c74364-95af-42df-a665-9e2fd1a7f507",
 	1,
-	'Port1::set_destination( x:-1, y:0, z:0 );
+	'Port1::set_destination( x:-3, y:0, z:0 );
 Port1::set_heading( heading:0 );',
 	'',
 	0);
@@ -2229,7 +2229,7 @@ INSERT INTO SM_ACT
 	VALUES ("6ce2acb8-947c-4c15-81b3-c0127a6ee10e",
 	"c0c74364-95af-42df-a665-9e2fd1a7f507",
 	1,
-	'Port1::set_destination( x:-1, y:0, z:0 );
+	'Port1::set_destination( x:-3, y:0, z:0 );
 Port1::set_heading( heading:0 );',
 	'',
 	0);
@@ -2356,7 +2356,7 @@ INSERT INTO SM_ACT
 	VALUES ("41d4ae79-37f2-4451-8a62-d27cbf0e8706",
 	"c0c74364-95af-42df-a665-9e2fd1a7f507",
 	1,
-	'Port1::set_destination( x:1, y:0, z:0 );
+	'Port1::set_destination( x:3, y:0, z:0 );
 Port1::set_heading( heading:0 );',
 	'',
 	0);
@@ -2371,7 +2371,7 @@ INSERT INTO SM_ACT
 	VALUES ("6433a814-93d4-4e28-9eba-92c52210eff1",
 	"c0c74364-95af-42df-a665-9e2fd1a7f507",
 	1,
-	'Port1::set_destination( x:1, y:0, z:0 );
+	'Port1::set_destination( x:3, y:0, z:0 );
 Port1::set_heading( heading:0 );',
 	'',
 	0);
@@ -2583,7 +2583,7 @@ INSERT INTO SM_AH
 INSERT INTO SM_ACT
 	VALUES ("46104194-42db-40c5-9c54-2cfc4a7d0c3c",
 	"c0c74364-95af-42df-a665-9e2fd1a7f507",
-	3,
+	1,
 	'',
 	'',
 	0);

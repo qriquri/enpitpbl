@@ -169,14 +169,14 @@ void gnc_set_destination(float x, float y, float z)
 {
 	// set_heading(psi);
 	//transform map to local
-	float deg2rad = (M_PI/180);
-	float Xlocal = x*cos((correction_heading_g + local_offset_g - 90)*deg2rad) - y*sin((correction_heading_g + local_offset_g - 90)*deg2rad);
-	float Ylocal = x*sin((correction_heading_g + local_offset_g - 90)*deg2rad) + y*cos((correction_heading_g + local_offset_g - 90)*deg2rad);
-	float Zlocal = z;
-
-	x = Xlocal + correction_vector_g.position.x + local_offset_pose_g.x;
-	y = Ylocal + correction_vector_g.position.y + local_offset_pose_g.y;
-	z = Zlocal + correction_vector_g.position.z + local_offset_pose_g.z;
+//	float deg2rad = (M_PI/180);
+//	float Xlocal = x*cos((correction_heading_g + local_offset_g - 90)*deg2rad) - y*sin((correction_heading_g + local_offset_g - 90)*deg2rad);
+//	float Ylocal = x*sin((correction_heading_g + local_offset_g - 90)*deg2rad) + y*cos((correction_heading_g + local_offset_g - 90)*deg2rad);
+//	float Zlocal = z;
+//
+//	x = Xlocal + correction_vector_g.position.x + local_offset_pose_g.x;
+//	y = Ylocal + correction_vector_g.position.y + local_offset_pose_g.y;
+//	z = Zlocal + correction_vector_g.position.z + local_offset_pose_g.z;
 	ROS_INFO("Destination set to x: %f y: %f z: %f origin frame", x, y, z);
 
 //	waypoint_g.pose.position.x = x;
@@ -186,9 +186,15 @@ void gnc_set_destination(float x, float y, float z)
 	waypoint_g.pose.position.x = x + My_position.x;
 	waypoint_g.pose.position.y = y + My_position.y;
 	waypoint_g.pose.position.z = z + My_position.z;
+//	waypoint_g.pose.position.x = x + current_pose_g.pose.pose.position.x;
+//	waypoint_g.pose.position.y = y + current_pose_g.pose.pose.position.y;
+//    waypoint_g.pose.position.z = z + current_pose_g.pose.pose.position.z;
     My_position.x = waypoint_g.pose.position.x;
     My_position.y = waypoint_g.pose.position.y;
     My_position.z = waypoint_g.pose.position.z;
+//    current_pose_g.pose.pose.position.x = waypoint_g.pose.position.x;
+//    current_pose_g.pose.pose.position.y = waypoint_g.pose.position.y;
+//    current_pose_g.pose.pose.position.z = waypoint_g.pose.position.z;
     //MYCODE-END
 
     is_waypoint_set = true;
@@ -520,7 +526,7 @@ else if(strcmp("right", command) == 0){
 	Control_right();
 }
 else if(strcmp("stop", command) == 0){
-	ROS_INFO("halt!!!!!!!");
+	ROS_INFO("stop!!!!!!!");
 	Control_stop();
 }
 
