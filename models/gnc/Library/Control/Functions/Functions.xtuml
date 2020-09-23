@@ -187,6 +187,40 @@ INSERT INTO PE_PE
 	"c266a8d5-aa61-43f4-9d01-7e2baedb603e",
 	"00000000-0000-0000-0000-000000000000",
 	1);
+INSERT INTO S_SYNC
+	VALUES ("f034656d-51d2-4e7a-a7f6-50fe2d2b8a78",
+	"00000000-0000-0000-0000-000000000000",
+	'move',
+	'',
+	'select any ctrl from instances of Controller;//serch instance
+generate Controller12:''move'' to ctrl;//send move event',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'',
+	0);
+INSERT INTO PE_PE
+	VALUES ("f034656d-51d2-4e7a-a7f6-50fe2d2b8a78",
+	1,
+	"c266a8d5-aa61-43f4-9d01-7e2baedb603e",
+	"00000000-0000-0000-0000-000000000000",
+	1);
+INSERT INTO S_SYNC
+	VALUES ("377d7cc4-becb-4f04-8e90-2c0f3c229607",
+	"00000000-0000-0000-0000-000000000000",
+	'land',
+	'',
+	'select any ctrl from instances of Controller;//serch instance
+generate Controller13:''land'' to ctrl;//send land event',
+	"ba5eda7a-def5-0000-0000-000000000000",
+	1,
+	'',
+	0);
+INSERT INTO PE_PE
+	VALUES ("377d7cc4-becb-4f04-8e90-2c0f3c229607",
+	1,
+	"c266a8d5-aa61-43f4-9d01-7e2baedb603e",
+	"00000000-0000-0000-0000-000000000000",
+	1);
 INSERT INTO PE_PE
 	VALUES ("c266a8d5-aa61-43f4-9d01-7e2baedb603e",
 	1,

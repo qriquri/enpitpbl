@@ -25,6 +25,9 @@
 #include <string>
 #include <signal.h>
 
+// custommsg
+#include <gnc/command.h>
+#include <gnc/GoalPos.h>
 /**
 \defgroup control_functions
 This module is designed to make high level control programming more simple. 
@@ -53,15 +56,24 @@ ros::ServiceClient arming_client;
 ros::ServiceClient land_client;
 ros::ServiceClient set_mode_client;
 ros::ServiceClient takeoff_client;
-ros::Subscriber command_sub;
+//ros::Subscriber command_sub;
 
 //MY_CODE-BEGIN
+ros::Subscriber command_sub;
+ros::Subscriber power_sub;
+//ros::Subscriber goal_pos_sub;
 struct MY_POSITION{
 	float x;
 	float y;
 	float z;
 };
-MY_POSITION My_position;
+struct GOAL_POSITION{
+	float x;
+	float y;
+	float z;
+};
+struct MY_POSITION My_position;
+struct GOAL_POSITION Goal_Pos;
 //MYCODE-END
 /**
 \ingroup control_functions
@@ -169,16 +181,22 @@ void gnc_set_destination(float x, float y, float z)
 {
 	// set_heading(psi);
 	//transform map to local
-//	float deg2rad = (M_PI/180);
-//	float Xlocal = x*cos((correction_heading_g + local_offset_g - 90)*deg2rad) - y*sin((correction_heading_g + local_offset_g - 90)*deg2rad);
-//	float Ylocal = x*sin((correction_heading_g + local_offset_g - 90)*deg2rad) + y*cos((correction_heading_g + local_offset_g - 90)*deg2rad);
-//	float Zlocal = z;
-//
-//	x = Xlocal + correction_vector_g.position.x + local_offset_pose_g.x;
-//	y = Ylocal + correction_vector_g.position.y + local_offset_pose_g.y;
-//	z = Zlocal + correction_vector_g.position.z + local_offset_pose_g.z;
-	ROS_INFO("Destination set to x: %f y: %f z: %f origin frame", x, y, z);
+	// float deg2rad = (M_PI/180);
+	// float Xlocal = x*cos((correction_heading_g + local_offset_g - 90)*deg2rad) - y*sin((correction_heading_g + local_offset_g - 90)*deg2rad);
+	// float Ylocal = x*sin((correction_heading_g + local_offset_g - 90)*deg2rad) + y*cos((correction_heading_g + local_offset_g - 90)*deg2rad);
+	// float Zlocal = z;
 
+	// x = Xlocal + correction_vector_g.position.x + local_offset_pose_g.x;
+	// y = Ylocal + correction_vector_g.position.y + local_offset_pose_g.y;
+	// z = Zlocal + correction_vector_g.position.z + local_offset_pose_g.z;
+	x = Goal_Pos.x;
+	y = Goal_Pos.y;
+	z = Goal_Pos.z;
+	Goal_Pos.x = 0;
+	Goal_Pos.y = 0;
+	Goal_Pos.z = 0;
+	ROS_INFO("Destination set to x: %f y: %f z: %f origin frame", x, y, z);
+    
 //	waypoint_g.pose.position.x = x;
 //	waypoint_g.pose.position.y = y;
 //	waypoint_g.pose.position.z = z;
@@ -327,9 +345,14 @@ The takeoff function will arm the drone and put the drone in a hover above the i
 */
 int gnc_takeoff(float takeoff_alt)
 {
-
+    //MYCODE BEGIN
+	Goal_Pos.z = takeoff_alt;
+	//MYCODE END
 	//intitialize first waypoint of mission
 	gnc_set_destination(0,0,takeoff_alt);
+	//MYCODE BEGIN
+	Goal_Pos.z = 0;
+	//MYCODE END
 	for(int i=0; i<100; i++)
 	{
 		local_pos_pub.publish(waypoint_g);
@@ -490,49 +513,108 @@ int gnc_land()
   }
 }
 
-void command_cb(const std_msgs::String::ConstPtr& msg)
+//MYCODE BEGIN
+
+void command_cb(const gnc::command::ConstPtr& msg)
 {
-char command[10];
-ROS_INFO("recv message");
-sprintf(command, "%s", msg->data.c_str());
+	char command[10];
+	ROS_INFO("recv message");
+	sprintf(command, "%s", msg->com.c_str());
 
-//EXECUTE COMMAND
-if(strcmp("halt", command) == 0){
-	ROS_INFO("halt!!!!!!!");
-	Control_hault();
-}
-else if(strcmp("up", command) == 0){
-	ROS_INFO("up!!!!!!!");
-    Control_up();
-}
-else if(strcmp("down", command) == 0){
-	ROS_INFO("down!!!!!!!");
-	Control_down();
-}
-else if(strcmp("front", command) == 0){
-	ROS_INFO("front!!!!!!!");
-	Control_front();
-}
-else if(strcmp("back", command) == 0){
-	ROS_INFO("back!!!!!!!");
-	Control_back();
-}
-else if(strcmp("left", command) == 0){
-	ROS_INFO("left!!!!!!!");
-	Control_left();
-}
-else if(strcmp("right", command) == 0){
-	ROS_INFO("right!!!!!!!");
-	Control_right();
-}
-else if(strcmp("stop", command) == 0){
-	ROS_INFO("stop!!!!!!!");
-	Control_stop();
-}
+	//EXECUTE COMMAND
+	if(strcmp("land", command) == 0){
+		ROS_INFO("land!!!!!!!");
+		Control_land();
+	}
+	else if(strcmp("up", command) == 0){
+		ROS_INFO("up!!!!!!!");
+		ROS_INFO("recv goal");
+		Goal_Pos.x = 0;
+		Goal_Pos.y = 0;
+		Goal_Pos.z = msg->z;
+		Control_move();
+	}
+	else if(strcmp("down", command) == 0){
+		ROS_INFO("down!!!!!!!");
+		Goal_Pos.x = 0;
+		Goal_Pos.y = 0;
+		Goal_Pos.z = msg->z;		
+		Control_move();
+	}
+	else if(strcmp("front", command) == 0){
+		ROS_INFO("front!!!!!!!");
+		Goal_Pos.x = 0;
+		Goal_Pos.y = msg->y;
+		Goal_Pos.z = 0;
+		Control_move();
+	}
+	else if(strcmp("rfront", command) == 0){
+	    ROS_INFO("rfront!!!!!!!");
+		Goal_Pos.x = msg->x;
+		Goal_Pos.y = msg->y;
+		Goal_Pos.z = 0;
+		Control_move();
+	}
+	else if(strcmp("lfront", command) == 0){
+		ROS_INFO("lfront!!!!!!!");
+		Goal_Pos.x = msg->x;
+		Goal_Pos.y = msg->y;
+		Goal_Pos.z = 0;
+		Control_move();
+	}
+	else if(strcmp("back", command) == 0){
+		ROS_INFO("back!!!!!!!");
+		Goal_Pos.x = 0;
+		Goal_Pos.y = msg->y;
+		Goal_Pos.z = 0;
+		Control_move();
+	}
+	else if(strcmp("lback", command) == 0){
+	    ROS_INFO("lback!!!!!!!");
+		Goal_Pos.x = msg->x;
+		Goal_Pos.y = msg->y;
+		Goal_Pos.z = 0;
+		Control_move();
+	}
+	else if(strcmp("rback", command) == 0){
+		ROS_INFO("rback!!!!!!!");
+		Goal_Pos.x = msg->x;
+		Goal_Pos.y = msg->y;
+		Goal_Pos.z = 0;
+		Control_move();
+	}
+	else if(strcmp("left", command) == 0){
+		ROS_INFO("left!!!!!!!");
+        Goal_Pos.x = msg->x;
+		Goal_Pos.y = 0;
+		Goal_Pos.z = 0;
+		Control_move();
+	}
+	else if(strcmp("right", command) == 0){
+		ROS_INFO("right!!!!!!!");
+        Goal_Pos.x = msg->x;
+		Goal_Pos.y = 0;
+		Goal_Pos.z = 0;
+		Control_move();
+	}
+	else if(strcmp("stop", command) == 0){
+		ROS_INFO("stop!!!!!!!");
+		Goal_Pos.x = 0;
+		Goal_Pos.y = 0;
+		Goal_Pos.z = 0;
+		Control_stop();
+	}
+	else if(strcmp("home", command) == 0){
+		ROS_INFO("home!!!!!!!");
+		Goal_Pos.x = -My_position.x;
+		Goal_Pos.y = -My_position.y;
+		Goal_Pos.z = 0;
+		Control_move();
+	}
 
 
 }
-
+//MYCODE END
 /**
 \ingroup control_functions
 This function is called at the beginning of a program and will start of the communication links to the FCU. The function requires the program's ros nodehandle as an input 
@@ -557,7 +639,8 @@ int init_publisher_subscriber(ros::NodeHandle controlnode)
 	set_mode_client = controlnode.serviceClient<mavros_msgs::SetMode>((ros_namespace + "/mavros/set_mode").c_str());
 	takeoff_client = controlnode.serviceClient<mavros_msgs::CommandTOL>((ros_namespace + "/mavros/cmd/takeoff").c_str());
 	collision_sub = controlnode.subscribe<sensor_msgs::LaserScan>("/spur/laser/scan", 1, scan_cb);
-	command_sub = controlnode.subscribe("cmd", 10, command_cb);
+	command_sub = controlnode.subscribe("command", 10, command_cb);
+    power_sub = controlnode.subscribe("battery", 100, battery_cb);
 }
 
 void gnc_sigint_handler(int sig) {

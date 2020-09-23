@@ -1,0 +1,54 @@
+-- BP 7.1.6 content: Package syschar: 3 persistence-version: 7.1.6
+
+INSERT INTO EP_PKG
+	VALUES ("c2eea231-1ce4-40f1-9e7d-38d88b4daef7",
+	"00000000-0000-0000-0000-000000000000",
+	"d923df31-2d4f-4454-ba3a-3347665a758b",
+	'a',
+	'',
+	0);
+INSERT INTO GD_MD
+	VALUES ("74619b1d-4d02-424c-9e71-bedcd43d4114",
+	112,
+	"c2eea231-1ce4-40f1-9e7d-38d88b4daef7",
+	108,
+	0,
+	0,
+	1,
+	1,
+	1,
+	12,
+	1,
+	0,
+	0,
+	0,
+	0,
+	0,
+	'',
+	'gnc::Library::Control::Control::a');
+INSERT INTO DIM_DIA
+	VALUES ("74619b1d-4d02-424c-9e71-bedcd43d4114",
+	'',
+	1.000000,
+	0.000000,
+	0.000000,
+	"00000000-0000-0000-0000-000000000000");
+INSERT INTO PE_PE
+	VALUES ("c2eea231-1ce4-40f1-9e7d-38d88b4daef7",
+	1,
+	"c7bc1f0d-acc5-45cd-afb5-da93bea1c897",
+	"00000000-0000-0000-0000-000000000000",
+	7);
+INSERT INTO EP_PKG_PROXY
+	VALUES ("c7bc1f0d-acc5-45cd-afb5-da93bea1c897",
+	"00000000-0000-0000-0000-000000000000",
+	"d923df31-2d4f-4454-ba3a-3347665a758b",
+	'Control',
+	'',
+	0,
+	'../Control.xtuml');
+INSERT INTO S_SYS_PROXY
+	VALUES ("d923df31-2d4f-4454-ba3a-3347665a758b",
+	'gnc',
+	1,
+	'../../../../gnc.xtuml');
